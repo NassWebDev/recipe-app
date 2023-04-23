@@ -14,6 +14,10 @@ app.use(express.json());
 // app.use(morgan('dev'));
 app.use(cors());
 
+app.get("/", (req, res) => {
+    res.send("Hi!")
+})
+
 app.use("/recipe", routes);
 
 module.exports = app;
