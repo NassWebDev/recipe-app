@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-
+import "../styles/form.scss";
 import { reactive } from 'vue';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
