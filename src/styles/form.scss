@@ -1,0 +1,120 @@
+.form{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    gap: 30px;
+    color: #ccc;
+
+    h1{
+        text-align: center;
+    }
+    
+    .inputs{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 15px 0;
+        
+        .input{
+            position: relative;
+
+            label{
+                position: absolute;
+                left: 10px;
+                top: 5px;
+                transition: 0.3s ease;
+                pointer-events: none;
+            }
+
+            input{
+                width: 100%;
+                height: 25px;
+                padding-left: 10px;
+                padding-top: 5px;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid #ccc;
+                caret-color: #ccc;
+                color: #ccc;
+            }
+
+            textarea{
+                width: 100%;
+                height: 50px;
+                padding-left: 10px;
+                // padding-top: 10px;
+                margin-top: 10px;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid #ccc;
+                caret-color: #ccc;
+                color: #ccc;
+            }
+
+            input:focus + label,
+            input:valid + label,
+            textarea:focus + label,
+            textarea:valid + label{
+                top: -10px;
+                font-size: 12px;
+            }
+        }
+
+        .textarea{
+
+            label{
+                top: 10px;
+            }
+        }
+
+        .ingredient{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 25px;
+        }
+
+        .password{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            p{
+                font-size: 13px;
+
+                a{
+                    color: #42b983;
+                }
+            }
+        }
+        p{
+                font-size: 13px;
+
+                a{
+                    color: #42b983;
+                }
+            }
+    }
+
+    .errorMsg{
+        font-size: 10px;
+        color: crimson;
+        text-align: center;
+    }
+
+    button{
+        background-color: #42b983;
+        width: 100px;
+        min-height: 35px;
+        color: rgb(26, 24, 43);
+        cursor: pointer;
+    }
+
+    .addingredients{
+        margin-top: 10px;
+    }
+}
