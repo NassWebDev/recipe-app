@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-backend/node_modules
-backend/.env
-
+api/node_modules
+api/.env
+api/vercel.json
