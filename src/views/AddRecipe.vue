@@ -56,7 +56,7 @@ const addRecipe = (async () => {
   }
   else{
     try{
-      const resp = await axios.post('http://localhost:3000/recipes', newRecipe);
+      const resp = await axios.post('http://127.0.0.1:3000/recipes', newRecipe);
       console.log(resp.data);
       Object.assign(newRecipe, {
                     name: "",
