@@ -36,14 +36,14 @@ const store = useRecipeStore();
 let recipes = ref(null);
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://localhost:3000/recipe/${id}`);
+  axios.delete(`http://localhost:3000/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
 
 onMounted(async () => {
     try {
-      await axios.get('http://localhost:3000/recipe')
+      await axios.get('http://localhost:3000/recipes')
       .then((resp) => recipes.value = resp.data)
       store.addRecipe(recipes.value)
         console.log(store.allrecipe[0]);

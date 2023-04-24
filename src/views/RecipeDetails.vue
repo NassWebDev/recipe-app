@@ -29,7 +29,7 @@ let recipes = ref(null)
 
 onMounted(async () => {
     try {
-      const resp = await axios.get(`http://localhost:3000/recipe/${route.params.id}`);
+      const resp = await axios.get(`http://localhost:3000/recipes/${route.params.id}`);
       const data = resp.data
       console.log(data);
       recipes.value = data
