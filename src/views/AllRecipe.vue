@@ -36,14 +36,14 @@ const store = useRecipeStore();
 let recipes = ref(null);
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:3000/recipes/${id}`);
+  axios.delete(`https://recipe-app-chi-five.vercel.app/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
 
 onMounted(async () => {
     try {
-      await axios.get('http://127.0.0.1:3000/recipes')
+      await axios.get('https://recipe-app-chi-five.vercel.app/recipes')
       .then((resp) => recipes.value = resp.data)
       store.addRecipe(recipes.value)
         console.log(store.allrecipe[0]);
