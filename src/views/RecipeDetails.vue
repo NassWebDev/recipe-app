@@ -4,11 +4,11 @@
             Retour
         </button>
         <h1>
-            Voici la présentation de "{{recipes?.name}}"
+            Voici la présentation de "{{recipes.name}}"
         </h1>
-        <p class="description">{{recipes?.description}}</p>
+        <p class="description">{{recipes.description}}</p>
         <p>Voici la liste des ingrédients:</p>
-        <ul v-for="i in recipes?.ingredients" :key="i">
+        <ul v-for="i in recipes.ingredients" :key="i">
             <li class="ingredient">{{i}}</li>
         </ul>
     </div>
@@ -29,7 +29,7 @@ let recipes = ref(null)
 
 onMounted(async () => {
     try {
-      const resp = await axios.get(`http://127.0.0.1:3000/recipes/${route.params.id}`);
+      const resp = await axios.get(`https://recipe-app-chi-five.vercel.app/recipes/${route.params.id}`);
       const data = resp.data
       console.log(data);
       recipes.value = data
