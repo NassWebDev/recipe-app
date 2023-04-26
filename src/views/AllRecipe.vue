@@ -41,7 +41,7 @@ const store = useRecipeStore();
 let recipes = ref(null);
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:3000/recipes/${id}`);
+  axios.delete(`https://recipe-app-chi-five.vercel.app/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
