@@ -32,12 +32,28 @@ module.exports.getRecipeByID = (async (req, res) => {
     })
 })
 
+module.exports.editRecipeByID = async (req, res) => {
+    const recipe = await RecipeModel.findById(req.params.id);
+  
+    if (!recipe) {
+        res.status(400).json({
+            message: "Cette recette n'existe pas"
+        });
+    }
+  
+    const updateRecipe = await RecipeModel.findByIdAndUpdate(recipe, req.body, {
+      new: true,
+    });
+  
+    res.status(200).json(updateRecipe);
+  };
+
 module.exports.deleteRecipeByID = (async (req, res) => {
     const recipe = await RecipeModel.findById(req.params.id)
     
     if(!recipe){
         res.status(400).json({
-            message: "Ce test n'existe pas."
+            message: "Cette recette n'existe pas."
         })
     }
 

@@ -10,6 +10,7 @@ router
 router
     .route('/:id')
     .get(recipesController.getRecipeByID)
+    .patch(recipesController.editRecipeByID)
     .delete(recipesController.deleteRecipeByID)
 
 module.exports = router;
