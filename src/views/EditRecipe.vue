@@ -44,7 +44,7 @@ let recipes = ref([])
 
 onMounted(async() => {
     try{
-      const resp = await axios.get(`http://127.0.0.1:3000/recipes/${route.params.id}`);
+      const resp = await axios.get(`https://recipe-app-chi-five.vercel.app/recipes/${route.params.id}`);
       const data = resp.data
       recipes.value = data;
       // newRecipe = reactive({
