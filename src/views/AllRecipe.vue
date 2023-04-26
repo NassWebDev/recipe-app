@@ -12,11 +12,16 @@
               <p class="description">
                 {{recipe.description}}
               </p>
-              <router-link :to="{name: 'RecipeDetails', params: {id: recipe._id}}">
-                <button>
-                  Voir la recette
-                </button>
-              </router-link>
+              <div class="buttons">
+                <router-link :to="{name: 'RecipeDetails', params: {id: recipe._id}}">
+                  <button>
+                    Voir la recette
+                  </button>
+                </router-link>
+                <router-link class="edit" :to="{name: 'EditRecipe', params: {id: recipe._id}}">
+                  <fa name="ri-edit-2-fill" scale="0.8"/>
+                </router-link>
+              </div>
             </div>
             <button @click="deleteRecipe(recipe._id)" class="delete">X</button>
           </li>
@@ -36,18 +41,17 @@ const store = useRecipeStore();
 let recipes = ref(null);
 
 const deleteRecipe = ((id) => {
-  axios.delete(`https://recipe-app-chi-five.vercel.app/recipes/${id}`);
+  axios.delete(`http://127.0.0.1:3000/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
 
 onMounted(async () => {
     try {
-      await axios.get('https://recipe-app-chi-five.vercel.app/recipes')
-      .then((resp) => recipes.value = resp.data)
-      store.addRecipe(recipes.value)
-        console.log(store.allrecipe[0]);
-        console.log(recipes.value);
+      const response = await axios.get('https://recipe-app-chi-five.vercel.app/recipes')
+      const data = await response.data;
+      store.addRecipe(data)
+      recipes.value = data;
     } catch (err) {
         // Handle Error Here
         console.error(err);
@@ -69,6 +73,11 @@ onMounted(async () => {
   a{
     color: #42b983;
   }
+  .edit{
+    color: #ccc;
+    text-decoration: none;
+  }
+
 
   .fade-enter-active,
   .fade-leave-active {
@@ -147,12 +156,18 @@ onMounted(async () => {
             text-overflow: ellipsis;
           }
 
-          button{
-            background-color: #42b983;
-            width: 100px;
-            height: 30px;
-            color: rgb(26, 24, 43);
-            cursor: pointer;
+          .buttons{
+            display: flex;
+            align-items: center;
+            column-gap: 10px;
+
+            button{
+              background-color: #42b983;
+              width: 100px;
+              height: 30px;
+              color: rgb(26, 24, 43);
+              cursor: pointer;
+            }
           }
         }
 
