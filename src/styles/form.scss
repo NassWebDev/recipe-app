@@ -5,7 +5,7 @@
     align-items: center;
     padding: 50px;
     gap: 30px;
-    color: #ccc;
+    color: var(--white);
 
     h1{
         text-align: center;
@@ -37,9 +37,9 @@
                 background-color: transparent;
                 outline: none;
                 border: none;
-                border-bottom: 1px solid #ccc;
-                caret-color: #ccc;
-                color: #ccc;
+                border-bottom: 1px solid var(--white);
+                caret-color: var(--white);
+                color: var(--white);
             }
 
             textarea{
@@ -51,9 +51,9 @@
                 background-color: transparent;
                 outline: none;
                 border: none;
-                border-bottom: 1px solid #ccc;
-                caret-color: #ccc;
-                color: #ccc;
+                border-bottom: 1px solid var(--white);
+                caret-color: var(--white);
+                color: var(--white);
             }
 
             input:focus + label,
@@ -87,7 +87,7 @@
                 font-size: 13px;
 
                 a{
-                    color: #42b983;
+                    color: var(--green);
                 }
             }
         }
@@ -95,7 +95,7 @@
                 font-size: 13px;
 
                 a{
-                    color: #42b983;
+                    color: var(--green);
                 }
             }
     }
@@ -107,10 +107,10 @@
     }
 
     button{
-        background-color: #42b983;
+        background-color: var(--green);
         width: 100px;
         min-height: 35px;
-        color: rgb(26, 24, 43);
+        color: var(--white);
         cursor: pointer;
     }
 
