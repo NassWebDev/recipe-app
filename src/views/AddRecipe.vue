@@ -39,6 +39,8 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
+import { useAuthStore } from '../store/auth';
+
 const newRecipe = reactive({
                     name: "",
                     description: "",
@@ -55,20 +57,22 @@ const addRecipe = (async () => {
     alert("Vous devez remplir les champs.")
   }
   else{
-    try{
-      const resp = await axios.post('http://127.0.0.1:3000/recipes', newRecipe);
+    if(!useAuthStore().user){
+        return
+    }
+    const resp = await axios.post('http://127.0.0.1:8000/recipes', newRecipe, {
+        headers: {
+          'Authorization': `Bearer ${useAuthStore().user.token}`
+        }
+      });
       console.log(resp.data);
       Object.assign(newRecipe, {
-                    name: "",
-                    description: "",
-                    ingredients: [],
-                    ingredientsRow: 1,
-                  });
+        name: "",
+        description: "",
+        ingredients: [],
+        ingredientsRow: 1,
+      });
       router.push('/')
-    }
-    catch(err){
-      console.error(err);
-    }
   }
 })
 </script>

@@ -16,27 +16,27 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRecipeStore } from '../store';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
-
-const store = useRecipeStore();
 
 const router = useRouter()
 const route = useRoute()
 
+import { useAuthStore } from '../store/auth';
+
 let recipes = ref(null)
 
 onMounted(async () => {
-    try {
-      const resp = await axios.get(`http://127.0.0.1:3000/recipes/${route.params.id}`);
-      const data = resp.data
-      console.log(data);
-      recipes.value = data
-    } catch (err) {
-        // Handle Error Here
-        console.error(err);
+    if(!useAuthStore().user){
+        return
     }
+    const resp = await axios.get(`http://127.0.0.1:8000/recipes/${route.params.id}`, {
+        headers: {
+          'Authorization': `Bearer ${useAuthStore().user.token}`
+        }
+    });
+    const data = resp.data
+    recipes.value = data
 });
 
 const back = (() => {
@@ -51,7 +51,7 @@ const back = (() => {
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  color: #ccc;
+  color: var(--white);
   padding: 30px 0;
   gap: 20px;
 
@@ -69,10 +69,10 @@ const back = (() => {
   }
 
     button{
-        background-color: #42b983;
+        background-color: var(--green);
         width: 100px;
         height: 30px;
-        color: rgb(26, 24, 43);
+        color: var(--white);
         cursor: pointer;
     }
 

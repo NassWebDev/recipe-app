@@ -32,30 +32,31 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRecipeStore } from '../store/index';
-import axios from 'axios'
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
 
-const store = useRecipeStore();
+import { useAuthStore } from '../store/auth';
 
 let recipes = ref(null);
 
+
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:3000/recipes/${id}`);
+  axios.delete(`http://127.0.0.1:8000/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
 
 onMounted(async () => {
-    try {
-      const response = await axios.get('https://recipe-app-chi-five.vercel.app/recipes')
-      const data = await response.data;
-      store.addRecipe(data)
-      recipes.value = data;
-    } catch (err) {
-        // Handle Error Here
-        console.error(err);
-    }
+  if(!useAuthStore().user){
+    return
+  }
+  const response = await axios.get('http://127.0.0.1:8000/recipes', {
+      headers: {
+        'Authorization': `Bearer ${useAuthStore().user.token}`
+      }
+    })
+  const data = await response.data;
+  recipes.value = data;
 });
 </script>
 
@@ -71,10 +72,10 @@ onMounted(async () => {
   gap: 5px;
 
   a{
-    color: #42b983;
+    color: var(--green);
   }
   .edit{
-    color: #ccc;
+    color: var(--white);
     text-decoration: none;
   }
 
@@ -138,7 +139,7 @@ onMounted(async () => {
           width: 75%;
           border: 1px solid #000;
           border-radius: 5px;
-          background-color: rgb(26, 24, 43);
+          background-color: var(--dark-blue);
           padding: 15px;
 
           h2{
@@ -162,10 +163,8 @@ onMounted(async () => {
             column-gap: 10px;
 
             button{
-              background-color: #42b983;
-              width: 100px;
-              height: 30px;
-              color: rgb(26, 24, 43);
+              background-color: var(--green);
+              color: var(--white);
               cursor: pointer;
             }
           }
@@ -176,7 +175,7 @@ onMounted(async () => {
           margin-left: 20px;
           background-color: transparent;
           border: none;
-          color: #ccc;
+          color: var(--white);
           cursor: pointer;
         }
       }
