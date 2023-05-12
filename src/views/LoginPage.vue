@@ -15,7 +15,6 @@
             <label for="password">
                 Mot de passe:
             </label>
-            <p>Vous avez oublié votre mot de passe ? <router-link to="/forgot">Ici</router-link></p>
         </div>
         <p>Vous n'avez pas de compte ? Allez <router-link to="/signup">ici</router-link>.</p>
     </div>
