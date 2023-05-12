@@ -57,6 +57,7 @@ const addRecipe = (async () => {
     alert("Vous devez remplir les champs.")
   }
   else{
+<<<<<<< HEAD
     if(!useAuthStore().user){
         return
     }
@@ -65,6 +66,10 @@ const addRecipe = (async () => {
           'Authorization': `Bearer ${useAuthStore().user.token}`
         }
       });
+=======
+    try{
+      const resp = await axios.post('https://recipe-app-chi-five.vercel.app/recipes', newRecipe);
+>>>>>>> 10fa075596edee0decb17790238db278f04e6a13
       console.log(resp.data);
       Object.assign(newRecipe, {
         name: "",

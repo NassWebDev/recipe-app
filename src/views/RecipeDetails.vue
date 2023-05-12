@@ -4,11 +4,11 @@
             Retour
         </button>
         <h1>
-            Voici la présentation de "{{recipes?.name}}"
+            Voici la présentation de "{{recipes.name}}"
         </h1>
-        <p class="description">{{recipes?.description}}</p>
+        <p class="description">{{recipes.description}}</p>
         <p>Voici la liste des ingrédients:</p>
-        <ul v-for="i in recipes?.ingredients" :key="i">
+        <ul v-for="i in recipes.ingredients" :key="i">
             <li class="ingredient">{{i}}</li>
         </ul>
     </div>
