@@ -37,8 +37,7 @@ import axios from 'axios';
 
 import { useAuthStore } from '../store/auth';
 
-let recipes = ref(null);
-
+let recipes = ref({});
 
 const deleteRecipe = ((id) => {
   axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {

@@ -42,7 +42,7 @@ const router = useRouter();
 
 import { useAuthStore } from '../store/auth';
 
-let recipes = ref([])
+let recipes = ref({})
 
 onMounted(async() => {
   if(!useAuthStore().user){
