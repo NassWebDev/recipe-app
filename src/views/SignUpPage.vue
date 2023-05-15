@@ -57,7 +57,7 @@ import { useAuthStore } from '../store/auth';
         }
         else{
             try{
-                const resp = await axios.post('/auth/signup', newUser);
+                const resp = await axios.post('http://127.0.0.1:8000/auth/signup', newUser);
                 console.log(resp.data);
                 Object.assign(newUser, {
                     username: "",
