@@ -4,11 +4,11 @@
             Retour
         </button>
         <h1>
-            Voici la présentation de "{{recipes.name}}"
+            Voici la présentation de "{{recipe.name}}"
         </h1>
-        <p class="description">{{recipes.description}}</p>
+        <p class="description">{{recipe.description}}</p>
         <p>Voici la liste des ingrédients:</p>
-        <ul v-for="i in recipes.ingredients" :key="i">
+        <ul v-for="i in recipe.ingredients" :key="i">
             <li class="ingredient">{{i}}</li>
         </ul>
     </div>
@@ -24,7 +24,7 @@ const route = useRoute()
 
 import { useAuthStore } from '../store/auth';
 
-let recipes = ref(null)
+let recipe = ref({})
 
 onMounted(async () => {
     if(!useAuthStore().user){
@@ -36,7 +36,8 @@ onMounted(async () => {
         }
     });
     const data = resp.data
-    recipes.value = data
+    recipe.value = data
+    console.log(recipe.value);
 });
 
 const back = (() => {
