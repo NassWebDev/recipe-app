@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 import { useAuthStore } from '../store/auth';
@@ -41,7 +41,7 @@ let recipes = ref(null);
 
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:8000/recipes/${id}`);
+  axios.delete(`/recipes/${id}`);
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
@@ -50,7 +50,7 @@ onMounted(async () => {
   if(!useAuthStore().user){
     return
   }
-  const response = await axios.get('http://127.0.0.1:8000/recipes', {
+  const response = await axios.get('/recipes', {
       headers: {
         'Authorization': `Bearer ${useAuthStore().user.token}`
       }

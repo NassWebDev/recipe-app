@@ -49,7 +49,7 @@ onMounted(async() => {
     return
   }
   console.log(useAuthStore().user);
-  const resp = await axios.get(`http://127.0.0.1:8000/recipes/${route.params.id}`, {
+  const resp = await axios.get(`/recipes/${route.params.id}`, {
     headers: {
       'Authorization': `Bearer ${useAuthStore().user.token}`
     }
