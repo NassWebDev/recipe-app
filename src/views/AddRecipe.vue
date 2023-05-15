@@ -60,7 +60,7 @@ const addRecipe = (async () => {
     if(!useAuthStore().user){
         return
     }
-    const resp = await axios.post('http://127.0.0.1:8000/recipes', newRecipe, {
+    const resp = await axios.post('https://recipe-app-0bsa.onrender.com/recipes', newRecipe, {
         headers: {
           'Authorization': `Bearer ${useAuthStore().user.token}`
         }

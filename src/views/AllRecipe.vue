@@ -40,7 +40,7 @@ import { useAuthStore } from '../store/auth';
 let recipes = ref({});
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {
+  axios.delete(`https://recipe-app-0bsa.onrender.com/recipes/${id}`, {
       headers: {
         'Authorization': `Bearer ${useAuthStore().user.token}`
       }
@@ -53,7 +53,7 @@ onMounted(async () => {
   if(!useAuthStore().user){
     return
   }
-  const response = await axios.get('http://127.0.0.1:8000/recipes', {
+  const response = await axios.get('https://recipe-app-0bsa.onrender.com/recipes', {
       headers: {
         'Authorization': `Bearer ${useAuthStore().user.token}`
       }

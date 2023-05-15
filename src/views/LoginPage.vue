@@ -43,7 +43,7 @@ const login = (async () => {
     }
     else{
         try{
-            const resp = await axios.post('http://127.0.0.1:8000/auth/login', User);
+            const resp = await axios.post('https://recipe-app-0bsa.onrender.com/auth/login', User);
             console.log(resp.data);
             Object.assign(User, {
                 email: "",
