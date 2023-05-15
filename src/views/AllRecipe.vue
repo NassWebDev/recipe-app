@@ -41,7 +41,11 @@ let recipes = ref(null);
 
 
 const deleteRecipe = ((id) => {
-  axios.delete(`http://127.0.0.1:8000/recipes/${id}`);
+  axios.delete(`http://127.0.0.1:8000/recipes/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${useAuthStore().user.token}`
+      }
+    })
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
   recipes.value.splice(indexRecipe, 1)
 })
