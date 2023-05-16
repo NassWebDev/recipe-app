@@ -5,14 +5,25 @@
     <router-link v-else to="/login" id="login">Login</router-link>
     <button v-if="currentUser" @click="logout">Logout</button>
   </nav>
-  <router-view/>
+  <router-view v-slot="{ Component }">
+    <suspense timeout="0">
+      <template #default>
+        <component :is="Component" :key="$route.path"></component>
+      </template>
+      <template #fallback>
+        <SpinnerLoading/>
+      </template>
+    </suspense>
+  </router-view>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import { useAuthStore } from './store/auth';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import SpinnerLoading from './components/SpinnerLoading.vue';
 const router = useRouter();
+
 
 const currentUser = computed(() => {
   return useAuthStore().isAuthenticated;
