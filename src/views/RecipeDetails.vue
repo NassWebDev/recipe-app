@@ -18,31 +18,30 @@
 import { ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import axios from 'axios';
-
-const router = useRouter()
-const route = useRoute()
-
 import { useAuthStore } from '../store/auth';
 
-let recipe = ref({})
+const router = useRouter()
+    const route = useRoute()
 
-onMounted(async () => {
-    if(!useAuthStore().user){
-        return
-    }
-    const resp = await axios.get(`https://recipe-app-0bsa.onrender.com/recipes/${route.params.id}`, {
-        headers: {
-          'Authorization': `Bearer ${useAuthStore().user.token}`
+    let recipe = ref({})
+
+    onMounted(async () => {
+        if(!useAuthStore().user){
+            return
         }
+        const resp = await axios.get(`https://recipe-app-0bsa.onrender.com/recipes/${route.params.id}`, {
+            headers: {
+            'Authorization': `Bearer ${useAuthStore().user.token}`
+            }
+        });
+        const data = resp.data
+        recipe.value = data
+        console.log(recipe.value);
     });
-    const data = resp.data
-    recipe.value = data
-    console.log(recipe.value);
-});
 
-const back = (() => {
-    router.push('/')
-})
+    const back = (() => {
+        router.push('/')
+    })
 </script>
 
 <style lang="scss" scoped>
