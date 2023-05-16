@@ -40,6 +40,7 @@
     import { reactive } from 'vue';
     import axios from 'axios';
     import { useRouter } from 'vue-router';
+    
 const router = useRouter();
 
 import { useAuthStore } from '../store/auth';
@@ -75,7 +76,7 @@ import { useAuthStore } from '../store/auth';
         }
     })
 </script>
-  
-<style scoped>
-  
+
+<style lang="scss" scoped>
+    @import "../styles/form.scss";
 </style>
