@@ -31,9 +31,18 @@ app.use((err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
+    const errorMessages = [];
+
+    for (const field in err.errors) {
+        if (Object.prototype.hasOwnProperty.call(err.errors, field)) {
+            const errorMessage = err.errors[field].message;
+            errorMessages.push(errorMessage);
+        }
+    }
+
     res.status(err.statusCode).json({
         status: err.status,
-        message: err.message
+        message: errorMessages
     })
 })
 

@@ -14,7 +14,10 @@ const userSchema = mongoose.Schema(
             unique: true,
             required:[true, 'Ajouter un email'],
             lowercase: true,
-            validate: [validator.isEmail, "Ajouter un email valide."]
+            validate: {
+                validator: (value) => /^[\w-]+(.[\w-]+)*@([\w-]+.)+[a-zA-Z]{2,7}$/.test(value),
+                message: 'Format invalide',
+            },
         },
         photo: {
             type: String
@@ -27,7 +30,7 @@ const userSchema = mongoose.Schema(
         },
         passwordConfirm: {
             type: String,
-            required:[true, 'Confirme votre mot de passe']
+            required:[true, 'Confirmer votre mot de passe']
         },
     }
 );
