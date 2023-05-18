@@ -28,6 +28,7 @@
                     Confirmer votre Mot de passe:
                 </label>
             </div>
+            <p>{{ errorMsg }}</p>
             <p>Vous avez déja un compte ? Allez <router-link to="/login">ici</router-link>.</p>
         </div>
         <button>
@@ -37,9 +38,9 @@
 </template>
   
 <script setup>
-    import { reactive } from 'vue';
-    import axios from 'axios';
-    import { useRouter } from 'vue-router';
+import { ref, reactive } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
     
 const router = useRouter();
 
@@ -51,6 +52,8 @@ import { useAuthStore } from '../store/auth';
         password: "",
         passwordConfirm: ""
     })
+
+const errorMsg = ref([])
     
     const signup = (async () => {
         if(!newUser.username || !newUser.email || !newUser.password || !newUser.passwordConfirm){
@@ -71,7 +74,7 @@ import { useAuthStore } from '../store/auth';
                 useAuthStore().login(resp.data);
             }
             catch(err){
-                console.error(err.message);
+                console.error(err);
             }
         }
     })

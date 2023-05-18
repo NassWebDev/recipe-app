@@ -2,7 +2,8 @@
   <nav>
     <router-link to="/">Recettes</router-link>
     <router-link v-if="currentUser" to="/addrecipe">Ajouter une recette</router-link>
-    <router-link v-else to="/login" id="login">Login</router-link>
+    <router-link v-else-if="!currentUser && $route.name == 'SignUpPage'" to="/login" id="login">Login</router-link>
+    <router-link v-else to="/signup" id="signup">Sign Up</router-link>
     <button v-if="currentUser" @click="logout">Logout</button>
   </nav>
   <router-view v-slot="{ Component }">
@@ -76,12 +77,16 @@ nav a.router-link-exact-active {
   color: var(--green);
 }
 
-#login, button {
+#login, #signup, button {
   border: 1px solid #ccc;
   color: var(--white);
   background-color: var(--green);
   font-weight: bold;
   padding: 5px 10px;
   text-decoration: none;
+}
+
+button{
+  cursor: pointer;
 }
 </style>
