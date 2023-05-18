@@ -20,6 +20,14 @@
         
         .input{
             position: relative;
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;              
+
+            .errorMsg{
+                font-size: 11px;
+                color: crimson;
+            }
 
             label{
                 position: absolute;
@@ -46,7 +54,6 @@
                 width: 100%;
                 height: 50px;
                 padding-left: 10px;
-                // padding-top: 10px;
                 margin-top: 10px;
                 background-color: transparent;
                 outline: none;
@@ -81,16 +88,8 @@
         .password{
             display: flex;
             flex-direction: column;
-            gap: 15px;
-
-            p{
-                font-size: 13px;
-
-                a{
-                    color: var(--green);
-                }
-            }
         }
+
         p{
             font-size: 13px;
             
@@ -98,19 +97,6 @@
                 color: var(--green);
             }
         }
-
-        .listErrors{
-            p{
-                font-size: 11px;
-                color: crimson;
-            }
-        }
-    }
-
-    .errorMsg{
-        font-size: 10px;
-        color: crimson;
-        text-align: center;
     }
 
     button{
