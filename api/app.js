@@ -31,12 +31,13 @@ app.use((err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
 
-    const errorMessages = [];
+    const errorMessages = {username: "", email: "", password: "", passwordConfirm: "",};
 
     for (const field in err.errors) {
         if (Object.prototype.hasOwnProperty.call(err.errors, field)) {
             const errorMessage = err.errors[field].message;
-            errorMessages.push(errorMessage);
+            const errorKey = err.errors[field].path;
+            errorMessages[errorKey] = errorMessage;
         }
     }
 
