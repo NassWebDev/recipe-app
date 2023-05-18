@@ -4,9 +4,9 @@
             Inscription
         </h1>
         <div class="inputs">
-            <div class="input name">
-                <input type="text" required v-model="newUser.username" id="name">
-                <label for="name">
+            <div class="input username">
+                <input type="text" required v-model="newUser.username" id="username">
+                <label for="username">
                     Nom:
                 </label>
             </div>
@@ -28,7 +28,9 @@
                     Confirmer votre Mot de passe:
                 </label>
             </div>
-            <p>{{ errorMsg }}</p>
+            <div class="listErrors">
+                <p v-for="error in errorMsg">{{ error }}</p>
+            </div>
             <p>Vous avez déja un compte ? Allez <router-link to="/login">ici</router-link>.</p>
         </div>
         <button>
@@ -74,7 +76,7 @@ const errorMsg = ref([])
                 useAuthStore().login(resp.data);
             }
             catch(err){
-                console.error(err);
+                errorMsg.value = err.response.data.message
             }
         }
     })
