@@ -5,7 +5,7 @@
     </h1>
     <div class="inputs">
         <div class="input email">
-            <input type="email" required v-model="User.email" id="email">
+            <input type="email" required v-model="User.email" id="email" autocomplete="off">
             <label for="email">
                 Email:
             </label>
