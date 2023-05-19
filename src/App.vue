@@ -7,14 +7,16 @@
     <button v-if="currentUser" @click="logout">Logout</button>
   </nav>
   <router-view v-slot="{ Component }">
-    <suspense timeout="0">
-      <template #default>
-        <component :is="Component" :key="$route.path"></component>
-      </template>
-      <template #fallback>
-        <SpinnerLoading/>
-      </template>
-    </suspense>
+    <Transition name="fade" mode="out-in">
+      <suspense timeout="0">
+        <template #default>
+          <component :is="Component" :key="$route.path"></component>
+        </template>
+        <template #fallback>
+          <SpinnerLoading/>
+        </template>
+      </suspense>
+    </Transition>
   </router-view>
 </template>
 
@@ -88,5 +90,22 @@ nav a.router-link-exact-active {
 
 button{
   cursor: pointer;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
 }
 </style>
