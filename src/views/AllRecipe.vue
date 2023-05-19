@@ -1,8 +1,8 @@
 <template>
   <div class="allrecipe">
     <transition mode="out-in" name="fade">
-      <!-- <p v-if="!recipes">Aucune recette, ajoutez <router-link to="/addrecipe">ici</router-link>. </p> -->
-      <div class="listRecipes">
+      <p v-if="Object.keys(recipes).length === 0">Aucune recette, ajoutez <router-link to="/addrecipe">ici</router-link>. </p>
+      <div class="listRecipes" v-else>
         <transition-group tag="ul" name="list" appear >
           <li v-for="recipe in recipes" :key="recipe._id" class="recipe">
             <div class="arecipe">
@@ -45,20 +45,25 @@ const deleteRecipe = ((id) => {
     }
   })
   const indexRecipe = recipes.value.findIndex(el => el._id === id);
-  recipes.value.splice(indexRecipe, 1)
+  recipes.value.splice(indexRecipe, 1);
 })
 
 onMounted(async () => {
   if(!useAuthStore().user){
     return
   }
-  const response = await axios.get('https://recipe-app-0bsa.onrender.com/recipes', {
-    headers: {
-      'Authorization': `Bearer ${useAuthStore().user.token}`
-    }
-  })
-  const data = await response.data;
-  recipes.value = data;
+  try{
+    const response = await axios.get('https://recipe-app-0bsa.onrender.com/recipes', {
+      headers: {
+        'Authorization': `Bearer ${useAuthStore().user.token}`
+      }
+    })
+    const data = await response.data;
+    recipes.value = data;
+  }
+  catch(err){
+    console.error(err);
+  }
 });
 </script>
 
@@ -101,6 +106,7 @@ onMounted(async () => {
 
   .listRecipes{
     width: 100%;
+    position: relative;
 
     .list-enter-active,
     .list-leave-active,
@@ -135,7 +141,6 @@ onMounted(async () => {
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
 
         .arecipe{
           width: 75%;
